@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
-import { nanoid } from "nanoid";
-import UserList from "./Phoonebook/UserList/UserList";
+import Form from "./Phoonebook/Form/Form";
 import Section from "./Phoonebook/Section/Section";
+import UserList from "./Phoonebook/UserList/UserList";
 
 class AppPhoneBook extends Component {
   state = {
@@ -11,39 +11,12 @@ class AppPhoneBook extends Component {
         {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
         {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    name: '',
-    number: ''
-  }
-
-  createContact = ({ target }) => {
-    this.setState({
-        [target.name]: target.value,
-    })
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.createUser({
-        id: nanoid(),
-        name: this.state.name,
-        number: this.state.number,
-    })
-  }
-
-  reset = () => {
-    this.setState({
-      name: '',
-      number: ''
-    })
   }
 
   createUser = (data) => {
-    const { contacts } = this.state;
-    console.log("d",data);
-    console.log(contacts)
-    contacts.push(data)
-    this.reset();
-
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, data]
+    }))
   }
   
  render() {
@@ -51,33 +24,7 @@ class AppPhoneBook extends Component {
   return (
     <div>
       <Section title="Phonebook">
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">
-              <input 
-                  id="name" 
-                  type="text" 
-                  name="name" 
-                  required 
-                  onChange={this.createContact}
-                  value={this.state.name}
-              /> 
-              Name
-          </label>
-
-          <label htmlFor="number">
-              <input 
-                  id="number" 
-                  type="text" 
-                  name="number" 
-                  required 
-                  onChange={this.createContact}
-                  value={this.state.number}
-              /> 
-              Number
-          </label>
-          
-          <button onClick={this.createContact} type="submit">Add contact</button>
-        </form>
+        <Form createUser={this.createUser}/>
       </Section>
       <Section title="Contacts">
         <UserList contacts={contacts}/>

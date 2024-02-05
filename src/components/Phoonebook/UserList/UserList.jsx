@@ -1,6 +1,5 @@
 import { UserItem, Btn, IconUser, IconTel, IconDelete } from "./UserList.styled";
 
-
 const UserList = ({ contacts }) => {
     return(
         <ul>
