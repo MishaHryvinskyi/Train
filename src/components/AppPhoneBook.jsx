@@ -1,5 +1,7 @@
 import React,{ Component } from "react";
 import { nanoid } from "nanoid";
+import UserList from "./Phoonebook/UserList/UserList";
+import Section from "./Phoonebook/Section/Section";
 
 class AppPhoneBook extends Component {
   state = {
@@ -28,52 +30,58 @@ class AppPhoneBook extends Component {
     })
   }
 
+  reset = () => {
+    this.setState({
+      name: '',
+      number: ''
+    })
+  }
+
   createUser = (data) => {
-    console.log("d",data)
+    const { contacts } = this.state;
+    console.log("d",data);
+    console.log(contacts)
+    contacts.push(data)
+    this.reset();
+
   }
   
  render() {
     const { contacts } = this.state;
   return (
     <div>
-      <h2>Phonebook</h2>
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
-            <input 
-                id="name" 
-                type="text" 
-                name="name" 
-                required 
-                onChange={this.createContact}
-                value={this.state.name}
-            /> 
-            Name
-        </label>
+      <Section title="Phonebook">
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="name">
+              <input 
+                  id="name" 
+                  type="text" 
+                  name="name" 
+                  required 
+                  onChange={this.createContact}
+                  value={this.state.name}
+              /> 
+              Name
+          </label>
 
-        <label htmlFor="number">
-            <input 
-                id="number" 
-                type="text" 
-                name="number" 
-                required 
-                onChange={this.createContact}
-                value={this.state.number}
-            /> 
-            Number
-        </label>
-        
-        <button onClick={this.createContact} type="submit">Add contact</button>
-      </form>
-      <h2>Contacts</h2>
-      <ul>
-        {contacts.map(({ id, name, number}) => (
-        <li key={id}>
-            <p>
-                <span>{name}</span> <span>{number}</span>
-            </p>
-        </li>
-        ))}
-      </ul>
+          <label htmlFor="number">
+              <input 
+                  id="number" 
+                  type="text" 
+                  name="number" 
+                  required 
+                  onChange={this.createContact}
+                  value={this.state.number}
+              /> 
+              Number
+          </label>
+          
+          <button onClick={this.createContact} type="submit">Add contact</button>
+        </form>
+      </Section>
+      <Section title="Contacts">
+        <UserList contacts={contacts}/>
+      </Section>
     </div>
   )
  }
