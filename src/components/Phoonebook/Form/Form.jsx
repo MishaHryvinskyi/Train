@@ -51,7 +51,7 @@ class Form extends Component {
                 Number
                 <input 
                   id="number" 
-                  type="text" 
+                  type="tel" 
                   name="number" 
                   required 
                   onChange={this.createContact}

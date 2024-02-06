@@ -1,6 +1,6 @@
 import { UserItem, Btn, IconUser, IconTel, IconDelete } from "./UserList.styled";
 
-const UserList = ({ contacts }) => {
+const UserList = ({ contacts, removeContact }) => {
     return(
         <ul>
         {contacts.map(({ id, name, number}) => (
@@ -8,7 +8,7 @@ const UserList = ({ contacts }) => {
             <p>
                 <IconUser /><span>{name}</span> : <IconTel /><span>{number}</span>
             </p>
-            <Btn>Delete<IconDelete /></Btn>
+            <Btn onClick={() => removeContact(id)}>Delete<IconDelete /></Btn>
         </UserItem>
         ))}
       </ul>
