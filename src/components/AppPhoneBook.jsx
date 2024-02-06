@@ -44,14 +44,14 @@ class AppPhoneBook extends Component {
   }
   
  render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
   
     const visibleContact = this.getVisibleContacts();
 
   return (
     <div>
       <Section title="Phonebook">
-        <Form createUser={this.createUser}/>
+        <Form createUser={this.createUser} contacts={contacts}/>
       </Section>
       <Section title="Contacts">
         <Filter filter={filter} changeFilter={this.changeFilter}/>

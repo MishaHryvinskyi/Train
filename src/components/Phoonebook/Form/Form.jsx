@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import React, { Component } from "react";
 import { FormEl } from "./Form.styled";
+import Notiflix from "notiflix";
 
 class Form extends Component {
     state = {
@@ -16,10 +17,26 @@ class Form extends Component {
     
       handleSubmit = (event) => {
         event.preventDefault();
-        this.props.createUser({
+        const { name } = this.state;
+
+        const isDuplicateName = this.props.contacts.some(
+          contact => contact.name === name
+        );
+
+        if (isDuplicateName) {
+          Notiflix.Notify.warning(`${name} is already in contacts.`,{
+            timeout: 6000,
+          });
+        return;
+      }
+
+      this.props.createUser({
             id: nanoid(),
             name: this.state.name,
             number: this.state.number,
+        })
+        Notiflix.Notify.success(`Contact ${this.state.name} successfully added`,{
+          timeout: 6000,
         })
         this.reset();
       }
