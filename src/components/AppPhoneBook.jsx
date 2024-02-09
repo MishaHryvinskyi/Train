@@ -71,7 +71,6 @@ class AppPhoneBook extends Component {
         <Filter filter={filter} changeFilter={this.changeFilter}/>
         <UserList contacts={visibleContact} removeContact={this.removeContact}/>
       </Section>
-      <div></div>
     </div>
   )
  }
