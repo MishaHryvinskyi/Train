@@ -1,41 +1,36 @@
 import Notiflix from "notiflix";
-import React, { Component } from "react";
+import { useState } from "react";
 import { ImSearch } from 'react-icons/im'
 
-export default class PokemonForm extends Component {
-    state = {
-        pokemonName : '',
-    };
-
-    handleChange = event => {
+export const PokemonForm = ({ onSubmit }) => {
+    const [pokemonName, setPokemonName] = useState('');
+    
+    const handleChange = event => {
         const { value } = event.currentTarget;
-        this.setState({ pokemonName: value.toLowerCase() });
+        setPokemonName(value.toLowerCase());
     };
 
-    handleSubmit = event => {
-        const { pokemonName } = this.state;
+    const handleSubmit = event => {
         event.preventDefault();
 
-        if(this.state.pokemonName.trim() === "") {
+        if(pokemonName.trim() === "") {
             Notiflix.Notify.failure("Введіть ім'я покемона!!!", {
                 timeout: 3000,
               },)
             return;
         }
-         
-        this.props.onSubmit(pokemonName);
-        this.setState({ pokemonName: '' });
+        
+        onSubmit(pokemonName);
+        setPokemonName('');
     };
 
-    render() {
-        const { pokemonName } = this.state;
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text"
                     name="pokemonName"
                     value={pokemonName}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                 />
                 <button type="submit">
                     <ImSearch style={{ marginRight: 8 }} />
@@ -43,5 +38,54 @@ export default class PokemonForm extends Component {
                 </button>
             </form>
         )
-    }
 }
+
+// classes component 
+
+// import Notiflix from "notiflix";
+// import React, { Component } from "react";
+// import { ImSearch } from 'react-icons/im'
+
+// export default class PokemonForm extends Component {
+//     state = {
+//         pokemonName : '',
+//     };
+
+//     handleChange = event => {
+//         const { value } = event.currentTarget;
+//         this.setState({ pokemonName: value.toLowerCase() });
+//     };
+
+//     handleSubmit = event => {
+//         const { pokemonName } = this.state;
+//         event.preventDefault();
+
+//         if(this.state.pokemonName.trim() === "") {
+//             Notiflix.Notify.failure("Введіть ім'я покемона!!!", {
+//                 timeout: 3000,
+//               },)
+//             return;
+//         }
+         
+//         this.props.onSubmit(pokemonName);
+//         this.setState({ pokemonName: '' });
+//     };
+
+//     render() {
+//         const { pokemonName } = this.state;
+//         return (
+//             <form onSubmit={this.handleSubmit}>
+//                 <input 
+//                     type="text"
+//                     name="pokemonName"
+//                     value={pokemonName}
+//                     onChange={this.handleChange}
+//                 />
+//                 <button type="submit">
+//                     <ImSearch style={{ marginRight: 8 }} />
+//                     Пошук
+//                 </button>
+//             </form>
+//         )
+//     }
+// }

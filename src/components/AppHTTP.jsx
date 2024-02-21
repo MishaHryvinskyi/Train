@@ -1,24 +1,44 @@
-import React, { Component } from "react";
-import PokemonForm from "./Pokemon/PokemonForm";
-import PokemonInfo from "./Pokemon/PokemonInfo";
+// import React, { Component } from "react";
 
-class AppHTTP extends Component {
-     state = {
-        pokemonName: '',
-     }
+import { useState } from "react";
+import { PokemonForm } from "./Pokemon/PokemonForm";
+import { PokemonInfo } from "./Pokemon/PokemonInfo";
 
-    handleSearchFormSubmit = (pokemonName) => {
-        this.setState({ pokemonName });
-    }
+export const AppHTTP = () => {
+    const [pokemonName, setPokemonName] = useState('');
 
-    render() {
-        return (
-            <div>
-                <PokemonForm onSubmit={this.handleSearchFormSubmit}/>
-                <PokemonInfo pokemonName={this.state.pokemonName}/>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <PokemonForm onSubmit={setPokemonName}/>
+            <PokemonInfo pokemonName={pokemonName}/>
+        </div>
+    )
 }
 
-export default AppHTTP;
+
+// Classes component
+
+// import React, { Component } from "react";
+// import PokemonForm from "./Pokemon/PokemonForm";
+// import PokemonInfo from "./Pokemon/PokemonInfo";
+
+// class AppHTTP extends Component {
+//      state = {
+//         pokemonName: '',
+//      }
+
+//     handleSearchFormSubmit = (pokemonName) => {
+//         this.setState({ pokemonName });
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 <PokemonForm onSubmit={this.handleSearchFormSubmit}/>
+//                 <PokemonInfo pokemonName={this.state.pokemonName}/>
+//             </div>
+//         )
+//     }
+// }
+
+// export default AppHTTP;

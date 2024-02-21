@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import  AppHTTP  from 'components/AppHTTP';
+import { AppHTTP } from 'components/AppHTTP';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
