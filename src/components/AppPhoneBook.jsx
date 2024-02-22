@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import Form from "./Phoonebook/Form/Form";
+import {Form} from "./Phoonebook/Form/Form";
 import Filter from "./Phoonebook/Filter/Filter";
 import Section from "./Phoonebook/Section/Section";
 import UserList from "./Phoonebook/UserList/UserList";

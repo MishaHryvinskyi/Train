@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { AppHTTP } from 'components/AppHTTP';
 import './index.css';
+import AppPhoneBook from 'components/AppPhoneBook';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AppHTTP />
+    <AppPhoneBook />
   </React.StrictMode>
 );
