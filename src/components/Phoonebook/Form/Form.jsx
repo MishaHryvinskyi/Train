@@ -10,51 +10,39 @@ export const Form = ({ contacts, createUser }) => {
 
 
     const createContact = ({ target }) => {
-      setName({
-            [target.name]: target.value,
-        })
-
-        setNumber({
-          [target.name]: target.value,
-      })
+      if(target.name === "name") {
+        setName(
+          target.value,
+      ) 
+      } else if(target.name === "phone") {
+        setNumber(
+          target.value,
+      )
+      }
       }
     
-      const handleSubmit = event => {
-        event.preventDefault();
+      
 
-        const isDuplicateName = contacts.some(
-          contact => contact.name === name
-        );
-
-        if (isDuplicateName) {
-          Notiflix.Notify.warning(`${name} is already in contacts.`,{
-            timeout: 6000,
-          });
-        return;
-      }
-
-      createUser({
-            id: nanoid(),
-            name,
-            number,
-        })
-        Notiflix.Notify.success(`Contact ${name} successfully added`,{
+    const handleSubmit = e => {
+      e.preventDefault();
+      const isDuplicateName = contacts.some(contact => contact.name === name);
+    
+      if (isDuplicateName) {
+        Notiflix.Notify.warning(`${name} is already in contacts.`,{
           timeout: 6000,
-        })
-        reset();
-      }
+        }
+        );
+        return;
+    }
     
-      const reset = () => {
-        setName({
-          name: '',
-        })
-
-        setNumber({
-          number: '',
-        })
-      }
-
+      const id = nanoid();
+      const newContact = { id, name, number };
     
+      createUser(newContact);
+      setName('');
+      setNumber('');
+    };
+
         return (
             <FormEl onSubmit={handleSubmit}>
           <label htmlFor="name">
