@@ -3,78 +3,77 @@ import { useState } from "react";
 import { FormEl } from "./Form.styled";
 import Notiflix from "notiflix";
 
-export const Form = ({ contacts, createUser }) => {
+const Form = ({ contacts, createUser }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-
-
-    const createContact = ({ target }) => {
-        if(target.name === "name") {
-          setName(
-            target.value,
-          ) 
-        } else if(target.name === "number") {
-          setNumber(
-            target.value,
-          )
-        }
-      }
+  const createContact = ({ target }) => {
+    if(target.name === "name") {
+      setName(
+        target.value,
+      ) 
+    } else if(target.name === "number") {
+      setNumber(
+        target.value,
+      )
+    }
+  }
     
-      
-
-    const handleSubmit = e => {
-      e.preventDefault();
-      const isDuplicateName = contacts.some(contact => contact.name === name);
+  const handleSubmit = event => {
+    event.preventDefault();
+    const isDuplicateName = contacts.some(contact => contact.name === name);
     
-      if (isDuplicateName) {
-        Notiflix.Notify.warning(`${name} is already in contacts.`,{
+    if (isDuplicateName) {
+      Notiflix.Notify.warning(`${name} is already in contacts.`,
+        {
           timeout: 6000,
         }
-        );
-        return;
-    }
+      );
+    return;
+  }
     
-      const id = nanoid();
-      const newContact = { id, name, number };
-    
-      createUser(newContact);
-      setName('');
-      setNumber('');
-    };
+    const id = nanoid();
+    const newContact = { id, name, number };
+      
+    createUser(newContact);
+    setName('');
+    setNumber('');
+  };
 
-        return (
-            <FormEl onSubmit={handleSubmit}>
-          <label htmlFor="name">
-                Name
-                <input 
-                  id="name" 
-                  type="text" 
-                  name="name" 
-                  required 
-                  onChange={createContact}
-                  value={name}
-                  placeholder="Enter name"
-                /> 
-          </label>
+  return (
+    <FormEl onSubmit={handleSubmit}>
+      <label htmlFor="name">
+        Name
+        <input 
+          id="name" 
+          type="text" 
+          name="name" 
+          required 
+          onChange={createContact}
+          value={name}
+          placeholder="Enter name"
+        /> 
+      </label>
 
-          <label htmlFor="number">
-                Number
-                <input 
-                  id="number" 
-                  type="tel" 
-                  name="number" 
-                  required 
-                  onChange={createContact}
-                  value={number}
-                  placeholder="Enter phone number"
-                /> 
-          </label>
+      <label htmlFor="number">
+        Number
+        <input 
+          id="number" 
+          type="tel" 
+          name="number" 
+          required 
+          onChange={createContact}
+          value={number}
+          placeholder="Enter phone number"
+        /> 
+      </label>
           
-          <button onClick={createContact} type="submit">Add contact</button>
-        </FormEl>
-        )
+      <button onClick={createContact} type="submit">Add contact</button>
+    </FormEl>
+  )
 }
+
+export default Form;
 
 
 
