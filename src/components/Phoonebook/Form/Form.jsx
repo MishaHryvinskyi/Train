@@ -10,15 +10,15 @@ export const Form = ({ contacts, createUser }) => {
 
 
     const createContact = ({ target }) => {
-      if(target.name === "name") {
-        setName(
-          target.value,
-      ) 
-      } else if(target.name === "phone") {
-        setNumber(
-          target.value,
-      )
-      }
+        if(target.name === "name") {
+          setName(
+            target.value,
+          ) 
+        } else if(target.name === "number") {
+          setNumber(
+            target.value,
+          )
+        }
       }
     
       
